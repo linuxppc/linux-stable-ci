@@ -43,7 +43,7 @@ static unsigned int opal_irq_count;
 static unsigned int *opal_irqs;
 
 static void opal_handle_irq_work(struct irq_work *work);
-static __be64 last_outstanding_events;
+static u64 last_outstanding_events;
 static struct irq_work opal_event_irq_work = {
 	.func = opal_handle_irq_work,
 };
@@ -55,9 +55,13 @@ static void opal_event_mask(struct irq_data *d)
 
 static void opal_event_unmask(struct irq_data *d)
 {
+	__be64 events;
+
 	set_bit(d->hwirq, &opal_event_irqchip.mask);
 
-	opal_poll_events(&last_outstanding_events);
+	opal_poll_events(&events);
+	last_outstanding_events = be64_to_cpu(events);
+
 	if (last_outstanding_events & opal_event_irqchip.mask)
 		/* Need to retrigger the interrupt */
 		irq_work_queue(&opal_event_irq_work);
@@ -131,7 +135,7 @@ static irqreturn_t opal_interrupt(int irq, void *data)
 
 static void opal_handle_irq_work(struct irq_work *work)
 {
-	opal_handle_events(be64_to_cpu(last_outstanding_events));
+	opal_handle_events(last_outstanding_events);
 }
 
 static int opal_event_match(struct irq_domain *h, struct device_node *node)
