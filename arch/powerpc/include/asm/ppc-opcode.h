@@ -139,6 +139,7 @@
 #define PPC_INST_ISEL			0x7c00001e
 #define PPC_INST_ISEL_MASK		0xfc00003e
 #define PPC_INST_LDARX			0x7c0000a8
+#define PPC_INST_STDCX			0x7c0001ad
 #define PPC_INST_LOGMPP			0x7c0007e4
 #define PPC_INST_LSWI			0x7c0004aa
 #define PPC_INST_LSWX			0x7c00042a
@@ -244,6 +245,13 @@
 #define PPC_INST_BRANCH_COND		0x40800000
 #define PPC_INST_LBZCIX			0x7c0006aa
 #define PPC_INST_STBCIX			0x7c0007aa
+#define PPC_INST_LWZX			0x7c00002e
+#define PPC_INST_LFSX			0x7c00042e
+#define PPC_INST_STFSX			0x7c00052e
+#define PPC_INST_LFDX			0x7c0004ae
+#define PPC_INST_STFDX			0x7c0005ae
+#define PPC_INST_LVX			0x7c0000ce
+#define PPC_INST_STVX			0x7c0001ce
 
 /* macros to insert fields into opcodes */
 #define ___PPC_RA(a)	(((a) & 0x1f) << 16)

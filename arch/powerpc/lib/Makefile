@@ -30,6 +30,7 @@ obj-$(CONFIG_PPC_EMULATE_SSTEP)	+= sstep.o ldstfp.o
 ifeq ($(CONFIG_PPC64),y)
 obj-$(CONFIG_SMP)	+= locks.o
 obj-$(CONFIG_ALTIVEC)	+= vmx-helper.o
+obj-$(CONFIG_KPROBES_SANITY_TEST) += test_emulate_step.o
 endif
 
 obj-$(CONFIG_PPC_LIB_RHEAP) += rheap.o
