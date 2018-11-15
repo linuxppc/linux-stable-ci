@@ -317,6 +317,14 @@ PHONY += ppc64le_defconfig
 ppc64le_defconfig:
 	$(call merge_into_defconfig,ppc64_defconfig,le)
 
+PHONY += ppc64le_guest_defconfig
+ppc64le_guest_defconfig:
+	$(call merge_into_defconfig,ppc64_defconfig,le guest)
+
+PHONY += ppc64_guest_defconfig
+ppc64_guest_defconfig:
+	$(call merge_into_defconfig,ppc64_defconfig,be guest)
+
 PHONY += mpc85xx_defconfig
 mpc85xx_defconfig:
 	$(call merge_into_defconfig,mpc85xx_basic_defconfig,\
