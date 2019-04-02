@@ -669,6 +669,7 @@ static int dlpar_memory_add_by_count(u32 lmbs_to_add, struct property *prop)
 		lmbs[i].reserved = 1;
 	}
 
+	rc = -EINVAL;
 	if (lmbs_added != lmbs_to_add) {
 		pr_err("Memory hot-add failed, removing any added LMBs\n");
 
